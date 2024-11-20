@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "categories/show"
   root "home#index" # Set the home page
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

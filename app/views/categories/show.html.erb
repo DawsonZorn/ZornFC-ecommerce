@@ -1,0 +1,16 @@
+<h1>Products in <%= @category.name %></h1>
+
+<div style="display: flex; flex-wrap: wrap;">
+  <% @products.each do |product| %>
+    <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 200px;">
+      <h3><%= product.name %></h3>
+      <% if product.image.attached? %>
+        <%= image_tag product.image, size: "150x150" %>
+      <% else %>
+        <p>No image available</p>
+      <% end %>
+      <p>Price: $<%= product.price %></p>
+      <p>Stock: <%= product.stock_quantity %></p>
+    </div>
+  <% end %>
+</div>
