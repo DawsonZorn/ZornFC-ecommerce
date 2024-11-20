@@ -1,2 +1,30 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Welcome to ZornFC</h1>
+
+<div>
+  <h2>Browse by Category</h2>
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.name, category_path(category) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <h2>All Products</h2>
+  <div style="display: flex; flex-wrap: wrap;">
+    <% @products.each do |product| %>
+      <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 400px;">
+        <h3><%= product.name %></h3>
+        <% if product.image.attached? %>
+          <%= image_tag product.image, size: "300x300" %>
+        <% else %>
+          <p>No image available</p>
+        <% end %>
+        <p>Price: $<%= product.price %></p>
+        <p>Stock: <%= product.stock_quantity %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
