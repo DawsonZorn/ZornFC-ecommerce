@@ -8,3 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+Category.create([
+  { name: 'Jerseys' },
+  { name: 'Jackets' },
+  { name: 'Sweaters' },
+  { name: 'Pants' },
+  { name: 'Training Gear' },
+  { name: 'Accessories' }
+])
