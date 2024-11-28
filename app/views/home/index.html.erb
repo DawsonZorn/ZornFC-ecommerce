@@ -1,37 +1,52 @@
 <h1>Welcome to ZornFC</h1>
 
-<div>
+<!-- Logo Image -->
+<div style="text-align: center; margin-bottom: 20px;">
+  <%= image_tag('zornfc.png', alt: 'ZornFC Logo', style: 'width: 200px;') %>
+</div>
+
+<!-- Navigation Bar -->
+<nav style="background-color: #333; padding: 10px;">
+  <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px;">
+    <li><%= link_to 'Home', root_path, style: 'color: white; text-decoration: none;' %></li>
+    <li><%= link_to 'All Products', root_path(filter: 'all'), style: 'color: white; text-decoration: none;' %></li>
+    <li><%= link_to 'On Sale', root_path(filter: 'on_sale'), style: 'color: white; text-decoration: none;' %></li>
+    <li><%= link_to 'New Products', root_path(filter: 'new'), style: 'color: white; text-decoration: none;' %></li>
+    <li><%= link_to 'Browse by Category', '#categories', style: 'color: white; text-decoration: none;' %></li>
+  </ul>
+</nav>
+
+<!-- Browse by Category Section -->
+<div id="categories" style="margin: 20px 0;">
   <h2>Browse by Category</h2>
-  <ul>
+  <ul style="list-style: none; padding: 0; display: flex; gap: 10px; flex-wrap: wrap;">
     <% @categories.each do |category| %>
-      <li>
-        <%= link_to category.name, category_path(category) %>
+      <li style="border: 1px solid #ddd; padding: 10px; text-align: center;">
+        <%= link_to category.name, category_path(category), class: 'btn btn-secondary' %>
       </li>
     <% end %>
   </ul>
 </div>
 
-<div>
-  <%= link_to 'All Products', root_path, class: 'btn btn-primary' %>
-  <%= link_to 'On Sale', root_path(filter: 'on_sale'), class: 'btn btn-secondary' %>
-  <%= link_to 'New Products', root_path(filter: 'new'), class: 'btn btn-secondary' %>
-</div>
-
-<div style="margin-top: 20px; display: flex; flex-wrap: wrap;">
-  <% @products.each do |product| %>
-    <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 200px;">
-      <h3><%= link_to product.name, product_path(product) %></h3>
-      <% if product.image.attached? %>
-        <%= image_tag product.image, size: "150x150" %>
-      <% else %>
-        <p>No image available</p>
-      <% end %>
-      <p>Price: $<%= product.price %></p>
-      <% if product.on_sale %>
-        <p><strong>On Sale!</strong></p>
-      <% end %>
-      <%= link_to 'View Details', product_path(product), class: 'btn btn-secondary' %>
-    </div>
-  <% end %>
-</div>
-</div>
+<!-- Products Section -->
+<% if params[:filter].present? %>
+  <div style="margin-top: 20px; display: flex; flex-wrap: wrap;">
+    <% @products.each do |product| %>
+      <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 200px;">
+        <h3><%= link_to product.name, product_path(product) %></h3>
+        <% if product.image.attached? %>
+          <%= image_tag product.image, size: "150x150" %>
+        <% else %>
+          <p>No image available</p>
+        <% end %>
+        <p>Price: $<%= product.price %></p>
+        <% if product.on_sale %>
+          <p><strong>On Sale!</strong></p>
+        <% end %>
+        <%= link_to 'View Details', product_path(product), class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p style="text-align: center; margin-top: 20px;">Select a filter or category to view products.</p>
+<% end %>
