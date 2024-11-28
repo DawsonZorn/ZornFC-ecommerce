@@ -12,8 +12,12 @@
 </div>
 
 <div>
-  <h2>All Products</h2>
-  <div style="display: flex; flex-wrap: wrap;">
+  <%= link_to 'All Products', root_path, class: 'btn btn-primary' %>
+  <%= link_to 'On Sale', root_path(filter: 'on_sale'), class: 'btn btn-secondary' %>
+  <%= link_to 'New Products', root_path(filter: 'new'), class: 'btn btn-secondary' %>
+</div>
+
+<div style="margin-top: 20px; display: flex; flex-wrap: wrap;">
   <% @products.each do |product| %>
     <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 200px;">
       <h3><%= link_to product.name, product_path(product) %></h3>
@@ -23,7 +27,9 @@
         <p>No image available</p>
       <% end %>
       <p>Price: $<%= product.price %></p>
-      <p>Stock: <%= product.stock_quantity %></p>
+      <% if product.on_sale %>
+        <p><strong>On Sale!</strong></p>
+      <% end %>
       <%= link_to 'View Details', product_path(product), class: 'btn btn-secondary' %>
     </div>
   <% end %>

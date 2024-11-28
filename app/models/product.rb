@@ -5,6 +5,10 @@ class Product < ApplicationRecord
   # Add Active Storage attachment for image
   has_one_attached :image
 
+  # Scopes
+  scope :on_sale, -> { where(on_sale: true) }
+  scope :new_products, -> { where("created_at >= ?", 30.days.ago) }
+
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
