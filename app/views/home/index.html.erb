@@ -48,7 +48,7 @@
 
   <!-- Products Section -->
   <div style="margin-top: 20px; display: flex; flex-wrap: wrap;">
-  <% if params[:search].present? || params[:category_id].present? %>
+  <% if params[:search].present? || params[:category_id].present? || params[:filter].present? %>
     <% if @products.any? %>
       <% @products.each do |product| %>
         <div style="margin: 10px; padding: 10px; border: 1px solid #ddd; width: 200px;">
@@ -70,4 +70,5 @@
     <% end %>
   <% end %>
 </div>
+
 

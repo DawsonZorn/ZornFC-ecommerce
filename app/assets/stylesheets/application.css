@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+/* Search form*/
 .search-form {
   display: flex;
   justify-content: center;
