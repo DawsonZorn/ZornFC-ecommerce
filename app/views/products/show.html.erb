@@ -13,6 +13,13 @@
 <p><strong>Description:</strong></p>
 <p><%= @product.description %></p>
 
+<%= form_with url: add_cart_path, method: :post, local: true do |form| %>
+  <%= form.hidden_field :product_id, value: @product.id %>
+  <%= form.number_field :quantity, value: 1, min: 1, style: "width: 50px;" %>
+  <%= form.submit "Add to Cart", class: "btn btn-primary" %>
+<% end %>
+
+
 <div>
   <%= link_to 'Back to Products', root_path, class: 'btn btn-primary'%>
 </div>

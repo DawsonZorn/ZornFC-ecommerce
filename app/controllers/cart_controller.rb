@@ -1,19 +1,24 @@
 class CartController < ApplicationController
   before_action :initialize_cart
 
-  def show
-    @cart_items = @cart.map do |product_id, quantity|
-      product = Product.find_by(id: product_id)
-      { product: product, quantity: quantity } if product
-    end.compact
+  def add
+    product = Product.find(params[:product_id])
+    quantity = params[:quantity].to_i
+
+    # Assuming you are using session to store the cart
+    session[:cart] ||= {}
+    session[:cart][product.id.to_s] ||= 0
+    session[:cart][product.id.to_s] += quantity
+
+    redirect_to cart_path, notice: "Product added to cart."
   end
 
-  def add
-    product_id = params[:product_id].to_s
-    @cart[product_id] ||= 0
-    @cart[product_id] += params[:quantity].to_i
-    save_cart
-    redirect_to cart_path, notice: "Product added to cart."
+  def show
+    # Retrieve all products in the cart based on product IDs stored in the session
+    @cart_items = session[:cart].map do |product_id, quantity|
+      product = Product.find(product_id)
+      { product: product, quantity: quantity }
+    end
   end
 
   def update
