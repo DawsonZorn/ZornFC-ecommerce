@@ -8,10 +8,12 @@ class HomeController < ApplicationController
     @products = @products.new_products if params[:filter] == "new"
 
     if params[:search].present? || params[:category_id].present?
-      @products = @products.joins(:category).where("products.name LIKE :search OR products.description LIKE :search", search: "%#{params[:search]}%") if params[:search].present?
+      if params[:search].present?
+        @products = @products.where("products.name LIKE :search OR products.description LIKE :search", search: "%#{params[:search]}%")
+      end
 
       if params[:category_id].present?
-        @products = @products.where(category_id: params[:category_id])
+        @products = @products.joins(:categories).where(categories: { id: params[:category_id] })
       end
     else
       @products = []
