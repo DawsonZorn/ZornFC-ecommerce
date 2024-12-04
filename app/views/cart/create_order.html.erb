@@ -1,0 +1,17 @@
+<h2>Thank you for your order!</h2>
+<p>Your order has been successfully placed. Here are your order details:</p>
+
+<h3>Order Summary</h3>
+<ul>
+  <% @order.order_items.each do |item| %>
+    <li>
+      <strong><%= item.product.name %></strong> - Quantity: <%= item.quantity %> - Price: $<%= item.item_price %>
+    </li>
+  <% end %>
+</ul>
+
+<p><strong>Subtotal:</strong> $<%= @order.subtotal %></p>
+<p><strong>Taxes:</strong> $<%= @order.taxes %></p>
+<p><strong>Total:</strong> $<%= @order.total_price %></p>
+
+<%= button_to "Back to Home", root_path, class: "btn btn-primary" %>

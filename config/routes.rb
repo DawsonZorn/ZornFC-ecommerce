@@ -24,13 +24,17 @@ Rails.application.routes.draw do
   get "cart", to: "cart#show", as: "cart"
   delete "cart/remove", to: "cart#remove", as: "remove_cart"
   patch "cart/update", to: "cart#update", as: "update_cart"
+  get "cart/update_taxes", to: "cart#update_taxes"
+  post "cart/create_order", to: "cart#create_order", as: "create_order"
 
   # Cart actions for adding, updating, and removing items
-  resources :cart, only: [] do
+  resources :cart, only: [ :show ] do
     collection do
       post :add
       patch :update
       delete :remove
+      post :create_order
+      get :update_taxes
     end
   end
 end
