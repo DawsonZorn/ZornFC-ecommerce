@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "static_pages/contact"
+  get "static_pages/about"
   get "products/show"
   get "categories/show"
   root "home#index" # Set the home page

@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "../cart";
+
+import "trix"
+import "@rails/actiontext"
