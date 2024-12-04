@@ -20,6 +20,10 @@ Rails.application.routes.draw do
    # Defines the root path route ("/")
    # root "posts#index"
 
+   # adds the routes for the contact and about pages
+   get "contact", to: "static_pages#contact"
+   get "about", to: "static_pages#about"
+
    # adds routes for the cart and its methods
    post "cart/add", to: "cart#add", as: "add_cart"
   # Define cart show route without requiring an id

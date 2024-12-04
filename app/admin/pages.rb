@@ -4,7 +4,7 @@ ActiveAdmin.register Page do
   form do |f|
     f.inputs do
       f.input :title
-      f.input ActionText, as: :text # or :content, as :text
+      f.input :content, as: :text
     end
     f.actions
   end
