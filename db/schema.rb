@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_04_214808) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_05_064238) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -109,6 +109,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_214808) do
     t.datetime "updated_at", null: false
     t.decimal "subtotal"
     t.decimal "taxes"
+    t.string "customer_email"
+    t.string "stripe_payment_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 

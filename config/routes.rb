@@ -25,6 +25,12 @@ Rails.application.routes.draw do
    get "contact", to: "static_pages#contact"
    get "about", to: "static_pages#about"
 
+
+   # Stripe checkout
+   post "checkout/buy_now", to: "checkout#buy_now", as: "buy_now"
+   get "checkout/success", to: "checkout#success", as: "checkout_success"
+
+
    # adds routes for the cart and its methods
    post "cart/add", to: "cart#add", as: "add_cart"
   # Define cart show route without requiring an id
