@@ -18,7 +18,7 @@
 <%= form_with url: buy_now_path, method: :post, local: true do |form| %>
   <%= form.hidden_field :product_id, value: @product.id %>
   <%= form.hidden_field :quantity, value: 1 %>
-  <%= form.submit "Buy Now", class: "btn btn-success" %>
+  <%= form.submit "Buy Now", class: "btn btn-primary" %>
 <% end %>
 
 <%# Checkout Form %>
@@ -26,7 +26,6 @@
   <%= form.hidden_field :product_id, value: @product.id %>
   <%= form.number_field :quantity, value: 1, min: 1, style: "width: 50px; margin: 10px;" %>
   <%= form.submit "Add to Cart", class: "btn btn-primary" %>
-  <%# <%= link_to "Buy Now", "#", class: "rounded-lg font-semibold p-4 text-center text-xl bg-yellow-500 hover:bg-yellow-400 w-40"%>
 <% end %>
 
 

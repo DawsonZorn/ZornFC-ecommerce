@@ -11,7 +11,8 @@ class HomeController < ApplicationController
     # Search and category filtering
     if params[:search].present? || params[:category_id].present?
       if params[:search].present?
-        @products = @products.where("products.name LIKE :search OR products.description LIKE :search", search: "%#{params[:search]}%")
+        @products = @products.where(
+"products.name LIKE :search OR products.description LIKE :search", search: "%#{params[:search]}%")
       end
 
       if params[:category_id].present? && params[:category_id] != "all"

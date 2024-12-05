@@ -29,6 +29,11 @@ gem "sassc-rails"
 
 gem "kaminari" # for paginating my products
 
+
+# rubo coop
+gem "rubocop"
+gem "rubocop-rails"
+
 # for third party payment
 gem "stripe"
 
