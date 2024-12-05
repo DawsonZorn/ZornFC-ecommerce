@@ -19,5 +19,6 @@ class HomeController < ApplicationController
         @products = @products.joins(:categories).where(categories: { id: params[:category_id] })
       end
     end
+    @products = @products.page(params[:page]).per(4)
   end
 end
