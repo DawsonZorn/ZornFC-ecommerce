@@ -20,6 +20,8 @@ Devise.setup do |config|
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
 
+# Ensure users remain logged in until logout
+  config.timeout_in = 45.minutes #  timeout duration
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

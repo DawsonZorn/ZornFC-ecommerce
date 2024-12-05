@@ -63,16 +63,16 @@ def create_order
   if customer.save
     # Create the order object (do not save it yet)
     order = customer.orders.new(
-      subtotal: @subtotal,
-      taxes: @taxes,
+      subtotal:    @subtotal,
+      taxes:       @taxes,
       total_price: @total
     )
 
     # Build order_items (in memory) for each cart item
     @cart_items.each do |item|
       order.order_items.build(
-        product: item[:product],
-        quantity: item[:quantity],
+        product:    item[:product],
+        quantity:   item[:quantity],
         item_price: item[:product].price
       )
     end
@@ -125,17 +125,17 @@ end
 
   def tax_rates
     {
-      "Manitoba" => { gst: 0.05, pst: 0.07, hst: 0 },
-      "Alberta" => { gst: 0.05, pst: 0, hst: 0 },
-      "Ontario" => { gst: 0, pst: 0, hst: 0.13 },
-      "British Columbia" => { gst: 0.05, pst: 0.07, hst: 0 },
-      "New Brunswick" => { gst: 0, pst: 0, hst: 0.15 },
+      "Manitoba"                  => { gst: 0.05, pst: 0.07, hst: 0 },
+      "Alberta"                   => { gst: 0.05, pst: 0, hst: 0 },
+      "Ontario"                   => { gst: 0, pst: 0, hst: 0.13 },
+      "British Columbia"          => { gst: 0.05, pst: 0.07, hst: 0 },
+      "New Brunswick"             => { gst: 0, pst: 0, hst: 0.15 },
       "Newfoundland and Labrador" => { gst: 0, pst: 0, hst: 0.15 },
-      "Northwest Territories" => { gst: 0.05, pst: 0, hst: 0 },
-      "Nova Scotia" => { gst: 0, pst: 0, hst: 0.15 },
-      "Nunavut" => { gst: 0.05, pst: 0, hst: 0 },
-      "Quebec" => { gst: 0.05, pst: 0.9975, hst: 0 },
-      "Saskatchewan" => { gst: 0.05, pst: 0.06, hst: 0 }
+      "Northwest Territories"     => { gst: 0.05, pst: 0, hst: 0 },
+      "Nova Scotia"               => { gst: 0, pst: 0, hst: 0.15 },
+      "Nunavut"                   => { gst: 0.05, pst: 0, hst: 0 },
+      "Quebec"                    => { gst: 0.05, pst: 0.9975, hst: 0 },
+      "Saskatchewan"              => { gst: 0.05, pst: 0.06, hst: 0 }
     }
   end
 
@@ -151,10 +151,10 @@ end
     taxes = gst + pst + hst
 
     render json: {
-      gst: gst.round(2),
-      pst: pst.round(2),
-      hst: hst.round(2),
-      total: (subtotal + taxes).round(2),
+      gst:      gst.round(2),
+      pst:      pst.round(2),
+      hst:      hst.round(2),
+      total:    (subtotal + taxes).round(2),
       subtotal: subtotal.round(2)
     }
   end

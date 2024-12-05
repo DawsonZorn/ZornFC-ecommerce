@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :customers
+  devise_for :customers, controllers: { registrations: 'customers/registrations' }
   get "static_pages/contact"
   get "static_pages/about"
   get "products/show"
