@@ -1,0 +1,18 @@
+<nav style="background-color: #333; padding: 10px;">
+  <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px;">
+    <li><%= link_to 'Home', root_path, style: 'color: #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'Contact', contact_path, style: 'color:  #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'About', about_path, style: 'color:  #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'All Products', root_path(filter: 'all'), style: 'color:  #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'On Sale', root_path(filter: 'on_sale'), style: 'color:  #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'New Products', root_path(filter: 'new'), style: 'color:  #FFD700; text-decoration: none;' %></li>
+    <li><%= link_to 'Browse by Category', '#categories', style: 'color: #FFD700; text-decoration: none;' %></li>
+    <% if customer_signed_in? %>
+      <p>Welcome, <%= current_customer.name %>!</p>
+      <%= button_to "Logout", destroy_customer_session_path, method: :delete, style: 'color: #FFD700; background: none; border: none; cursor: pointer;' %>
+    <% else %>
+      <%= link_to "Sign Up", new_customer_registration_path, style: 'color: #FFD700; text-decoration: none;' %> |
+      <%= link_to "Login", new_customer_session_path, style: 'color: #FFD700; text-decoration: none;' %>
+    <% end %>
+  </ul>
+</nav>

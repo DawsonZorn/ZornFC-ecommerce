@@ -1,0 +1,25 @@
+<div class="container" style="margin-top: 20px;">
+  <div class="row">
+    <% if @products.any? %>
+      <% @products.each do |product| %>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="card" style="border: 1px solid #ddd;">
+            <%= link_to product_path(product), class: "card-link" do %>
+              <img src="<%= product.image.attached? ? url_for(product.image) : '' %>" class="card-img-top" alt="<%= product.name %>" style="max-height: 200px; object-fit: cover;">
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= number_to_currency(product.price) %></p>
+              <% if product.on_sale %>
+                <p class="text-danger"><strong>On Sale!</strong></p>
+              <% end %>
+              <%= link_to 'View Details', product_path(product), class: 'btn btn-secondary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="text-align: center; margin-top: 20px;">No products found for your search criteria.</p>
+    <% end %>
+  </div>
+</div>

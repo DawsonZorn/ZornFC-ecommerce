@@ -6,84 +6,20 @@
     <%= image_tag('zornfc.png', alt: 'ZornFC Logo', style: 'width: 250px;') %>
   </div>
 
-  <!-- Search Bar -->
-  <div style="text-align: center; margin-bottom: 20px;">
-    <%= form_with url: root_path, method: :get, local: true, class: 'search-form' do %>
-      <label class="search-label">
-        <%= text_field_tag :search, params[:search], class: 'input', required: true, placeholder: 'Type here...' %>
-        <kbd class="slash-icon">/</kbd>
-        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
-          <g>
-            <path d="M55.146 51.887 41.588 37.786A22.926 22.926 0 0 0 46.984 23c0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837a3.004 3.004 0 0 0 .083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z" fill="currentColor"></path>
-          </g>
-        </svg>
-      </label>
-      <%= select_tag :category_id, options_for_select([['All Categories', 'all']] + @categories.map { |c| [c.name, c.id] }, params[:category_id]), class: 'dropdown' %>
-      <%= submit_tag 'Search', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+  <!-- Search and Filter Partial -->
+  <%= render 'search_filter' %>
 
-  <!-- Navigation Bar -->
-  <nav style="background-color: #333; padding: 10px;">
-    <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px;">
-      <li><%= link_to 'Home', root_path, style: 'color: #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'Contact', contact_path, style: 'color:  #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'About', about_path, style: 'color:  #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'All Products', root_path(filter: 'all'), style: 'color:  #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'On Sale', root_path(filter: 'on_sale'), style: 'color:  #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'New Products', root_path(filter: 'new'), style: 'color:  #FFD700; text-decoration: none;' %></li>
-      <li><%= link_to 'Browse by Category', '#categories', style: 'color: #FFD700; text-decoration: none;' %></li>
-      <% if customer_signed_in? %>
-        <p>Welcome, <%= current_customer.name %>!</p>
-        <%= button_to "Logout", destroy_customer_session_path, method: :delete, style: 'color: #FFD700; background: none; border: none; cursor: pointer;' %>
-      <% else %>
-        <%= link_to "Sign Up", new_customer_registration_path, style: 'color: #FFD700; text-decoration: none;' %> |
-        <%= link_to "Login", new_customer_session_path, style: 'color: #FFD700; text-decoration: none;' %>
-      <% end %>
-    </ul>
-  </nav>
+  <!-- Navigation Bar Partial -->
+  <%= render 'nav' %>
 
   <!-- Browse by Category Section -->
-  <div id="categories" style="margin: 20px 0; background-color: #333; padding: 10px;">
-    <h2 style="color:#FFD700; text-align: center;">Browse by Category</h2>
-    <ul style="list-style: none; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-      <% @categories.each do |category| %>
-        <li style="padding: 10px; text-align: center;">
-          <%= link_to category.name, category_path(category), style: 'color: #FFD700; text-decoration: none;' %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render 'categories', categories: @categories %>
 
-  <div class="container" style="margin-top: 20px;">
-  <div class="row">
-    <% if params[:search].present? || params[:category_id].present? || params[:filter].present? %>
-      <% if @products.any? %>
-        <% @products.each do |product| %>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card" style="border: 1px solid #ddd;">
-              <%= link_to product_path(product), class: "card-link" do %>
-                <img src="<%= product.image.attached? ? url_for(product.image) : '' %>" class="card-img-top" alt="<%= product.name %>" style="max-height: 200px; object-fit: cover;">
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><%= product.name %></h5>
-                <p class="card-text"><%= number_to_currency(product.price) %></p>
-                <% if product.on_sale %>
-                  <p class="text-danger"><strong>On Sale!</strong></p>
-                <% end %>
-                <%= link_to 'View Details', product_path(product), class: 'btn btn-secondary btn-sm' %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+  <!-- Products Section with Grid Partial -->
+  <%= render 'product_grid' %>
 
-        <!-- Pagination -->
-        <div class="col-12">
-          <%= paginate @products %>
-        </div>
-      <% else %>
-        <p style="text-align: center; margin-top: 20px;">No products found for your search criteria.</p>
-      <% end %>
-    <% end %>
+  <!-- Pagination -->
+  <div class="col-12">
+    <%= paginate @products %>
   </div>
 </div>

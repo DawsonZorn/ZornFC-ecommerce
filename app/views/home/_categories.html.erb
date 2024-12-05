@@ -1,0 +1,11 @@
+<!-- Browse by Category Section -->
+<div id="categories" style="margin: 20px 0; background-color: #333; padding: 10px;">
+  <h2 style="color:#FFD700; text-align: center;">Browse by Category</h2>
+  <ul style="list-style: none; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+    <% categories.each do |category| %>
+      <li style="padding: 10px; text-align: center;">
+        <%= link_to category.name, category_path(category), style: 'color: #FFD700; text-decoration: none;' %>
+      </li>
+    <% end %>
+  </ul>
+</div>
