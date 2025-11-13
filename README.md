@@ -1,13 +1,28 @@
+# ZornFC
+
 ## About
 ZornFC is a full-stack e-commerce website for a mock soccer team called ZornFC
 
 ## Features
-This website features include a user authentication system, an admin dashboard for deleting and uploading items to sell on the site, and a sorting function that allows users to sort items by name or type (on sale or new, etc.). It also includes a shopping cart feature to add an item to your cart and fill out your details to then check out using a 3rd party payment platform, Stripe.
+This website features user authentication, an admin dashboard for CRUD operations (uploading and deleting products), and moderating product comments. Additionally, it includes product discovery with a search bar and a category filter (e.g., Jackets, Pants). Sorting by name or type (e.g., on sale, new). It also includes a shopping cart function  with checkout that collects customer details and processes payments via Stripe.
 
 ## Tech Stack
-* Ruby-On-Rails
-* React
-* TailWind
+* Ruby-On-Rails (7.2.1)
+* SQlite3 (1.4)
+* BootStrap
 
 ## Setup
+```bash
+# Navigate to project root
+cd ZornFC-ecommerce
+# Install dependencies
+bundle install
+# Create DB, load schema, and seed (creates dev admin)
+bin/rails db:setup
+# Start the server
+bin/rails server
+# Open in browser
+http://localhost:3000
+```
+
 
